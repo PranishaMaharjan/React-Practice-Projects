@@ -1,0 +1,32 @@
+.primary_btn {
+  padding: 18px 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  align-items: center;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  border: none;
+  border-radius: 4px;
+  min-width: 240px;
+}
+
+.outline_btn {
+  padding: 18px 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  align-items: center;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 800;
+  border: none;
+  border-radius: 4px;
+  width: 520px;
+  border: 2px solid #000000;
+  /* margin-top: 20px; */
+  /* width: 100%; */
+}
