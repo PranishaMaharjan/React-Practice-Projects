@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "../styled/Button";
 
 const StartGame = ({ toggle }) => {
   return (
@@ -30,24 +31,5 @@ const Container = styled.div`
   .content h1 {
     font-size: 96px;
     margin: 10px 0;
-  }
-`;
-
-const Button = styled.button`
-  color: white;
-  padding: 10px 18px;
-  background: black;
-  border-radius: 5px;
-  min-width: 220px;
-  border: 2px solid transparent;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-
-  &:hover {
-    background-color: white;
-    border: 2px solid black;
-    color: black;
-    transition: 0.2s ease;
   }
 `;
