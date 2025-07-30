@@ -34,6 +34,15 @@ const App = () => {
     const searchValue = e.target.value;
 
     console.log(searchValue);
+
+    if (searchValue == "") {
+      setFilteredData(null);
+    }
+
+    const filter = data?.filter((food) =>
+      food.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredData(filter);
   };
 
   const filterFood = (type) => {
@@ -46,9 +55,29 @@ const App = () => {
     const filter = data?.filter((food) =>
       food.type.toLowerCase().includes(type.toLowerCase())
     );
+
     setFilteredData(filter);
     setSelectedBtn(type);
   };
+
+  const filterBtn = [
+    {
+      name: "All",
+      type: "all",
+    },
+    {
+      name: "Breakfast",
+      type: "breakfast",
+    },
+    {
+      name: "Lunch",
+      type: "lunch",
+    },
+    {
+      name: "Dinner",
+      type: "dinner",
+    },
+  ];
 
   if (error) {
     return <div>{error}</div>;
@@ -76,10 +105,22 @@ const App = () => {
       </TopSection>
 
       <FilterContainer>
-        <Button onClick={() => filterFood("all")}>All</Button>
+        {/* without map */}
+        {/* <Button onClick={() => filterFood("all")}>All</Button>
         <Button onClick={() => filterFood("breakfast")}>Breakfast</Button>
-        <Button onClick={() => filterFood("launch")}>Launch</Button>
-        <Button onClick={() => filterFood("dinner")}>Dinner</Button>
+        <Button onClick={() => filterFood("lunch")}>Launch</Button>
+        <Button onClick={() => filterFood("dinner")}>Dinner</Button> */}
+
+        {/* using map */}
+
+        {filterBtn.map((value) => {
+          return (
+            <Button key={value.name} onClick={() => filterFood(value.type)}>
+              {value.name}
+              {console.log(value.name)}
+            </Button>
+          );
+        })}
       </FilterContainer>
 
       <SearchResult data={filteredData} />
