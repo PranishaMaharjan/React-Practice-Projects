@@ -6,20 +6,21 @@ export const BASE_URL = "http://localhost:9000";
 
 const App = () => {
   const [data, setData] = useState(null);
+  const [filteredData, setFilteredData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedBtn, setSelectedBtn] = useState("all");
 
   useEffect(() => {
     const fetchFoodData = async () => {
       setLoading(true);
       try {
         const response = await fetch(BASE_URL);
-
         const json = await response.json();
 
-        console.log("Data in App:", json);
-        setLoading(false);
         setData(json);
+        setFilteredData(json);
+        setLoading(false);
       } catch (error) {
         setError("Unable to fetch data");
       }
@@ -27,13 +28,36 @@ const App = () => {
     fetchFoodData();
   }, []);
 
+  console.log(data);
+
+  const searchFood = (e) => {
+    const searchValue = e.target.value;
+
+    console.log(searchValue);
+  };
+
+  const filterFood = (type) => {
+    if (type == "all") {
+      setFilteredData(data);
+      setSelectedBtn("all");
+      return;
+    }
+
+    const filter = data?.filter((food) =>
+      food.type.toLowerCase().includes(type.toLowerCase())
+    );
+    setFilteredData(filter);
+    setSelectedBtn(type);
+  };
+
   if (error) {
     return <div>{error}</div>;
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading</div>;
   }
+
   return (
     <MainContainer>
       <TopSection>
@@ -43,6 +67,7 @@ const App = () => {
 
         <div className="search">
           <input
+            onChange={searchFood}
             className="search_input"
             name="search"
             placeholder="Search Food..."
@@ -51,13 +76,13 @@ const App = () => {
       </TopSection>
 
       <FilterContainer>
-        <Button>All</Button>
-        <Button>Breakfast</Button>
-        <Button>Launch</Button>
-        <Button>Dinner</Button>
+        <Button onClick={() => filterFood("all")}>All</Button>
+        <Button onClick={() => filterFood("breakfast")}>Breakfast</Button>
+        <Button onClick={() => filterFood("launch")}>Launch</Button>
+        <Button onClick={() => filterFood("dinner")}>Dinner</Button>
       </FilterContainer>
 
-      <SearchResult data={data} />
+      <SearchResult data={filteredData} />
     </MainContainer>
   );
 };

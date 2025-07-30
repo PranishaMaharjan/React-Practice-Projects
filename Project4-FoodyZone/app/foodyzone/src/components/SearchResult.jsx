@@ -7,8 +7,26 @@ const SearchResult = ({ data }) => {
     <FoodCardContainer>
       {console.log(`Data:${data}`)}
 
-      <FoodCards>
+      {/* <FoodCards>
         {data?.map(({ name, text, image, price }) => (
+          <FoodCard key={name}>
+            <div className="food_image">
+              <img src={BASE_URL + image} />
+            </div>
+
+            <div className="food_info">
+              <div className="info">
+                <h3>{name}</h3>
+                <p>{text}</p>
+              </div>
+
+              <Button>${price.toFixed(2)}</Button>
+            </div>
+          </FoodCard>
+        ))}
+      </FoodCards> */}
+      <FoodCards>
+        {data?.map(({ image, name, price, text }) => (
           <FoodCard key={name}>
             <div className="food_image">
               <img src={BASE_URL + image} />
